@@ -1,5 +1,6 @@
 ---
-import Nav from './nav.astro'
+import '../styles/global.css'
+const { title } = Astro.props
 ---
 <html lang="en">
 	<head>
@@ -7,10 +8,9 @@ import Nav from './nav.astro'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{ title || "Astro" }</title>
 	</head>
 	<body>
-		<Nav />
     <slot />
 	</body>
 </html>
