@@ -1,14 +1,14 @@
 ---
 import Layout from '../layout/index.astro'
-import Navigation from '../components/Navigation.astro'
+import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 
 const pageTitle = "About Me"
 const skillColor = "navy"
-const fontWeight = 300
+const fontWeight = 600
 const textCase = "lowercase"
 ---
-<Navigation />
+<Header />
 
 <Layout title={pageTitle}>
   <h1>{pageTitle}</h1>
@@ -20,11 +20,17 @@ const textCase = "lowercase"
 
 <Footer />
 
-<!-- <style define:vars={{skillColor, fontWeight, textCase}}>
+<script>
+  document.querySelector('.humburger').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('expanded');
+  });
+</script>
+
+<style define:vars={{skillColor, fontWeight, textCase}}>
   h1 {
     color: var(--skillColor);
     font-size: 4rem;
     font-weight: var(--fontWeight);
     text-transform: var(--textCase);
   }
-</style> -->
+</style>
