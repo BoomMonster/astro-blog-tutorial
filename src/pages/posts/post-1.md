@@ -8,6 +8,7 @@ image:
   url: 'https://astro.build/assets/blog/astro-1-release-update/cover.jpeg'
   alt: 'The Astro logo with the word one'
 tags: ['astro', 'blogging', 'learning in public']
+abc: 123
 ---
 # My First Blog Post
 
