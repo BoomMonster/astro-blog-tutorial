@@ -3,11 +3,18 @@ import BlogPost from '../../components/BlogPost.astro'
 import Layout from '../../layout/index.astro'
 
 export async function getStaticPaths() {
+  // 文件路由 获取所有的md文件 
+  // 不能放在方法的外部，否则会报错，因为这个方法是在编译时执行的，而不是在运行时执行的
   const allPosts = await Astro.glob("../posts/*.md")
+
+  // 将文件中的tags提取出来 唯一化
   const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())]
 
+  // 根据tags生成路由
   return uniqueTags.map((tag) => {
+    // 根据tag过滤出对应的文件
     const filterPosts = allPosts.filter((post) => post.frontmatter.tags.includes(tag))
+    // 返回路由
     return {
       params: { tag },
       props: { posts: filterPosts }
@@ -15,8 +22,9 @@ export async function getStaticPaths() {
   })
 }
 
+// 从路由中获取tag
 const { tag } = Astro.params
-
+// 从路由的props中获取posts
 const { posts } = Astro.props
 ---
 <Layout title={tag}>
@@ -25,7 +33,7 @@ const { posts } = Astro.props
   <!-- <ul>
     {filterPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
   </ul> -->
-  <!-- twice -->
+  <!-- twice: render post -->
   <ul>
     {posts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title}/>)}
   </ul>

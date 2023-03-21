@@ -1,0 +1,38 @@
+---
+import Layout from '../../layout/index.astro'
+import BlogPost from '../../components/BlogPost.astro'
+// const tags = ["astro", "blogging", "learning in public", "successes", "setbacks"]
+// 获取所有的md文件
+const allPosts = await Astro.glob("../posts/*.md")
+// 提取md文件中的tags 唯一化 生成一个数组
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())]
+
+// const filterPosts = allPosts.filter((post) => post.frontmatter.tags.some((tag) => tags.includes(tag)))
+---
+<Layout title="Astro Tags page" pageTitle="Tags Index">
+<!-- {filterPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)} -->
+{tags.map((tag) => <div class="tags">
+  <a href={`/tags/${tag}`}>{tag}</a>  
+</div>)}
+</Layout>
+
+<style>
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>
