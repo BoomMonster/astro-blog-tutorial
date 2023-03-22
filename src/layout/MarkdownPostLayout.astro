@@ -9,7 +9,7 @@ const { tags } = frontmatter
 
   <p>Written by: {frontmatter.author}</p>
 
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} /> 
+  <!-- <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />  -->
   <slot />
   <div class="tags">
     {tags.map((tag) => <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>)}
